@@ -1,4 +1,7 @@
 # live_json
+[![GitHub](https://img.shields.io/github/stars/Miserlou/live_json?style=social)](https://github.com/Miserlou/live_json)
+[![Hex.pm](https://img.shields.io/hexpm/v/live_json.svg)](https://hex.pm/packages/live_json)
+[![WIP](https://img.shields.io/badge/status-WIP-red)](https://github.com/Miserlou/live_json)
 
 **LiveJSON** provides LiveView-like updating for JSON objects rather than DOM elements. It works within your existing LiveViews - just use `push_patch` as you would `assign` or `push_event`. 
 
