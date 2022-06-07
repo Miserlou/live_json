@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../assets/js/live_json/index.ts", "../../assets/js/live_json/live_json.ts"],
+  "sourcesContent": ["export * from './live_json';\n", "function createLiveJSONHooks() {\n  return {\n    LiveJSON: {\n      mounted() {\n        // this.xxx();\n      }\n    },\n  };\n}\n\nexport {createLiveJSONHooks};"],
+  "mappings": ";;;;;;;;;AAAA;AAAA;AAAA;;;ACAA,+BAA+B;AAC7B,SAAO;AAAA,IACL,UAAU;AAAA,MACR,UAAU;AAAA;AAAA;AAAA;AAAA;",
+  "names": []
+}

@@ -1,0 +1,25 @@
+{
+  "name": "live_json",
+  "version": "0.0.1",
+  "description": "LiveJSON - LiveView + JSON = ❤️",
+  "license": "MIT",
+  "private": true,
+  "module": "./priv/static/live_json.esm.js",
+  "main": "./priv/static/live_json.cjs.js",
+  "exports": {
+    "import": "./priv/static/live_json.esm.js",
+    "require": "./priv/static/live_json.cjs.js"
+  },
+  "author": "Rich Jones <miserlou@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Miserlou/live_json.git"
+  },
+  "files": [
+    "README.md",
+    "LICENSE.md",
+    "package.json",
+    "priv/static/*",
+    "assets/js/live_json/*"
+  ]
+}
