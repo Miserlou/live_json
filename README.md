@@ -3,7 +3,7 @@
 [![Hex.pm](https://img.shields.io/hexpm/v/live_json.svg)](https://hex.pm/packages/live_json)
 [![WIP](https://img.shields.io/badge/status-WIP-red)](https://github.com/Miserlou/live_json)
 
-**LiveJSON** provides LiveView-like updating for JSON objects rather than DOM elements. It works within your existing LiveViews - just use `push_patch` as you would `assign` or `push_event`. 
+**LiveJSON** provides LiveView-like updating for JSON objects rather than DOM elements. It works within your existing LiveViews - just use `push_patch` as you would `assign` or `push_event`. Only the changes to the data are sent over the wire, not the whole object every time.
 
 ### Example
 
@@ -22,13 +22,13 @@ window.viz_data
 // {1: ["a"], 2: ["b"] ... 99999: ["zzzzz"]}
 ```
 
-The data is automatically updated, but if you check the WebSocket, you'll see that on the data the changed has been sent.
+The data is automatically updated, but if you check the WebSocket, you'll see that on the data that changed has been sent.
 
 ### Problem / Solution
 
-Phoenix LiveView is awesome for automatically updating your webpage's DOM. However, it doesn't work as well for data objects, since it works at the DOM level. So, if you load your data via a templated `script` tag, you'd have to rewrite the whole tag, not just the elements that changed, which could mean sending a lot of data over the wire and cause other headaches on the client-side.
+Phoenix LiveView is awesome for automatically updating your webpage's DOM. However, it doesn't work as well for data objects, since it only works at the DOM level out of the box, meaning any complex data objects need to be entirely re-sent every time. So, if you load your JS app's data via a templated `script` tag, LiveView will rewrite the whole tag, not just the elements that changed, which means sending a lot of data over the wire and other headaches on the client-side.
 
-LiveJSON is a simple solution - it uses Jsondiff/JSON-Patch (RFC 6902) to only send the delta of the data, which is then patched client side, similar to how `morphdom` works on the DOM.
+LiveJSON is a simple alternative - it uses Jsondiff/JSON-Patch (RFC 6902) to only send the delta of the data, which is then patched client side, similar to how `morphdom` works on the DOM. 
 
 This may be useful for **front-end frameworks**, **data visualization**, **games** and anything else where you need dynamically updated data that lives outside of the DOM, like **mobile apps**.
 
