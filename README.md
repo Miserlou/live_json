@@ -19,6 +19,8 @@ window.viz_data
 // {1: ["a"], 2: ["b"] ... 99999: ["zzzzz"]}
 ```
 
+The data is automatically updated, but if you check the WebSocket, you'll see that on the data the changed has been sent.
+
 ### Problem / Solution
 
 Phoenix LiveView is awesome for automatically updating your webpage's DOM. However, it doesn't work as well for data objects, since it works at the DOM level. So, if you load your data via a templated `script` tag, you'd have to rewrite the whole tag, not just the elements that changed, which could mean sending a lot of data over the wire and cause other headaches on the client-side.
@@ -29,6 +31,43 @@ This may be useful for **front-end frameworks**, **data visualization**, **games
 
 ## Installation
 
+First, the usual:
+
+```elixir
+def deps do
+  [
+    {:live_json, "~> 0.1.0"}
+  ]
+end
+```
+
+Next, you'll need to set up the hooks in your `app.js`:
+
+```javascript
+// Import the JS..
+import { createLiveJsonHook } from 'live_json';
+const liveJsonHook = createLiveJsonHook();
+
+// ..then define all your hooks..
+const Hooks = {
+  // your other hooks
+  // ...
+  ...liveJsonHook,
+};
+
+// ..and use them!
+let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
+let liveSocket = new LiveSocket("/live", Socket, {
+  hooks: Hooks,
+  params: {_csrf_token: csrfToken},
+});
+```
+
+..then you're good to go!
+
+## Usage
+...
+
 ## Capabilities and Limitations
 
 ### Fast and Non-Standard
@@ -38,9 +77,6 @@ By default, LiveJSON uses `jsondiff` for diffing/patching data. This is fast, bu
 ### Slower and Standardized
 
 Alternately, you can use `:rfc` mode to use JSON-Patch (RFC 6902) style patching. This is (currently) slower, but will mean that your data can be used by a larger number of consumers, such as a mobile applications.
-
-## Usage
-...
 
 ## TODO
 ...
