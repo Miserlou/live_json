@@ -48,14 +48,14 @@ Next, you'll need to set up the hooks in your `app.js`:
 
 ```javascript
 // Import the JS..
-import { createLiveJsonHook } from 'live_json';
-const liveJsonHook = createLiveJsonHook();
+import { createLiveJsonHooks } from 'live_json';
+const liveJsonHooks = createLiveJsonHooks();
 
 // ..then define all your hooks..
 const Hooks = {
   // your other hooks
   // ...
-  ...liveJsonHook,
+  ...liveJsonHooks,
 };
 
 // ..and use them!
