@@ -66,7 +66,17 @@ let liveSocket = new LiveSocket("/live", Socket, {
 });
 ```
 
-..then you're good to go!
+If your app uses an `assets/package.json`, you'll also need to add:
+
+```json
+{
+  "dependencies": {
+    "live_json": "file:../deps/live_json"
+  }
+}
+```
+
+and then `npm install`.
 
 ## Usage
 ...
