@@ -160,7 +160,8 @@ There actually isn't very much code in this repo, just a convenient interface an
 Other people have tried to solve this problem in other ways, but this was the solution that I wanted for my application. If you'd like to explore alternate approaches see:
 
  * [hanishe/live_data](https://github.com/hansihe/live_data)
-
+ * [surferseo/live_data](https://github.com/surferseo/live_data)
+ 
 The project structure for building and packaging hooks comes from:
 
  * [benvp/live_motion](https://github.com/benvp/live_motion)
