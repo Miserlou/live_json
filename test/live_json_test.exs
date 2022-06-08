@@ -3,6 +3,6 @@ defmodule LiveJsonTest do
   doctest LiveJson
 
   test "greets the world" do
-    assert LiveJson.hello() == :world
+    assert LiveJson.safer_string_to_atom("hello") == :hello
   end
 end

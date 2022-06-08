@@ -1,5 +1,5 @@
 import * as jsonpatch from 'fast-json-patch';
-require('jsondiffpatch');
+import * as jsondiffpatch from 'jsondiffpatch';
 
 // via https://gist.github.com/jamestowers/40646b505167d88406c1de647ffa3885
 function dispatchGlobalEvent(eventName) {
@@ -14,29 +14,27 @@ function dispatchGlobalEvent(eventName) {
   window.dispatchEvent(event)
 }
 
-function createLiveJSONHooks() {
+export function createLiveJSONHooks() {
   return {
     LiveJSON: {
       mounted() {
         
-          this.handleEvent("lj:patch", ({doc_name, patch, method}) => {
-              if(method === "rfc"){
-                window[doc_name] = jsonpatch.applyPatch(window[doc_name], patch).newDocument;
-              } else {
-                window[doc_name] = jsondiffpatch.patch(window[doc_name], patch);
-              }
+          this.handleEvent("lj:patch", ({doc_name, patch, method}) => {       
+            if(method == "rfc"){
+              window[doc_name] = jsonpatch.applyPatch(window[doc_name], patch).newDocument;
+            } else {
+              window[doc_name] = jsondiffpatch.patch(window[doc_name], patch);
+            }
 
-              dispatchGlobalEvent(doc_name + "_patched");
+            dispatchGlobalEvent(doc_name + "_patched");
           });
 
-          this.handleEvent("lj:init", ({doc_name, initial_data}) => {
-            window[doc_name] = initial_data;
-            dispatchGlobalEvent(doc_name + "_initiated");
+          this.handleEvent("lj:init", ({doc_name, data}) => {
+            window[doc_name] = data;
+            dispatchGlobalEvent(doc_name + "_initialized");
           });
 
       }
     },
   };
-}
-
-export {createLiveJSONHooks};
+};

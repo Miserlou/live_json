@@ -1,5 +1,10 @@
 var LiveJson = (() => {
+  var __create = Object.create;
   var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
   var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[Object.keys(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
@@ -8,6 +13,17 @@ var LiveJson = (() => {
     __markAsModule(target);
     for (var name in all)
       __defProp(target, name, { get: all[name], enumerable: true });
+  };
+  var __reExport = (target, module, desc) => {
+    if (module && typeof module === "object" || typeof module === "function") {
+      for (let key of __getOwnPropNames(module))
+        if (!__hasOwnProp.call(target, key) && key !== "default")
+          __defProp(target, key, { get: () => module[key], enumerable: !(desc = __getOwnPropDesc(module, key)) || desc.enumerable });
+    }
+    return target;
+  };
+  var __toModule = (module) => {
+    return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", module && module.__esModule && "default" in module ? { get: () => module.default, enumerable: true } : { value: module, enumerable: true })), module);
   };
 
   // node_modules/jsondiffpatch/dist/empty.js
@@ -2104,29 +2120,29 @@ var LiveJson = (() => {
             }
             return s;
           };
-          diff_match_patch2.prototype.patch_addContext_ = function(patch2, text) {
+          diff_match_patch2.prototype.patch_addContext_ = function(patch3, text) {
             if (text.length == 0) {
               return;
             }
-            var pattern = text.substring(patch2.start2, patch2.start2 + patch2.length1);
+            var pattern = text.substring(patch3.start2, patch3.start2 + patch3.length1);
             var padding = 0;
             while (text.indexOf(pattern) != text.lastIndexOf(pattern) && pattern.length < this.Match_MaxBits - this.Patch_Margin - this.Patch_Margin) {
               padding += this.Patch_Margin;
-              pattern = text.substring(patch2.start2 - padding, patch2.start2 + patch2.length1 + padding);
+              pattern = text.substring(patch3.start2 - padding, patch3.start2 + patch3.length1 + padding);
             }
             padding += this.Patch_Margin;
-            var prefix = text.substring(patch2.start2 - padding, patch2.start2);
+            var prefix = text.substring(patch3.start2 - padding, patch3.start2);
             if (prefix) {
-              patch2.diffs.unshift([DIFF_EQUAL, prefix]);
+              patch3.diffs.unshift([DIFF_EQUAL, prefix]);
             }
-            var suffix = text.substring(patch2.start2 + patch2.length1, patch2.start2 + patch2.length1 + padding);
+            var suffix = text.substring(patch3.start2 + patch3.length1, patch3.start2 + patch3.length1 + padding);
             if (suffix) {
-              patch2.diffs.push([DIFF_EQUAL, suffix]);
+              patch3.diffs.push([DIFF_EQUAL, suffix]);
             }
-            patch2.start1 -= prefix.length;
-            patch2.start2 -= prefix.length;
-            patch2.length1 += prefix.length + suffix.length;
-            patch2.length2 += prefix.length + suffix.length;
+            patch3.start1 -= prefix.length;
+            patch3.start2 -= prefix.length;
+            patch3.length1 += prefix.length + suffix.length;
+            patch3.length2 += prefix.length + suffix.length;
           };
           diff_match_patch2.prototype.patch_make = function(a, opt_b, opt_c) {
             var text1, diffs;
@@ -2153,7 +2169,7 @@ var LiveJson = (() => {
               return [];
             }
             var patches = [];
-            var patch2 = new diff_match_patch2.patch_obj();
+            var patch3 = new diff_match_patch2.patch_obj();
             var patchDiffLength = 0;
             var char_count1 = 0;
             var char_count2 = 0;
@@ -2163,30 +2179,30 @@ var LiveJson = (() => {
               var diff_type = diffs[x][0];
               var diff_text = diffs[x][1];
               if (!patchDiffLength && diff_type !== DIFF_EQUAL) {
-                patch2.start1 = char_count1;
-                patch2.start2 = char_count2;
+                patch3.start1 = char_count1;
+                patch3.start2 = char_count2;
               }
               switch (diff_type) {
                 case DIFF_INSERT:
-                  patch2.diffs[patchDiffLength++] = diffs[x];
-                  patch2.length2 += diff_text.length;
+                  patch3.diffs[patchDiffLength++] = diffs[x];
+                  patch3.length2 += diff_text.length;
                   postpatch_text = postpatch_text.substring(0, char_count2) + diff_text + postpatch_text.substring(char_count2);
                   break;
                 case DIFF_DELETE:
-                  patch2.length1 += diff_text.length;
-                  patch2.diffs[patchDiffLength++] = diffs[x];
+                  patch3.length1 += diff_text.length;
+                  patch3.diffs[patchDiffLength++] = diffs[x];
                   postpatch_text = postpatch_text.substring(0, char_count2) + postpatch_text.substring(char_count2 + diff_text.length);
                   break;
                 case DIFF_EQUAL:
                   if (diff_text.length <= 2 * this.Patch_Margin && patchDiffLength && diffs.length != x + 1) {
-                    patch2.diffs[patchDiffLength++] = diffs[x];
-                    patch2.length1 += diff_text.length;
-                    patch2.length2 += diff_text.length;
+                    patch3.diffs[patchDiffLength++] = diffs[x];
+                    patch3.length1 += diff_text.length;
+                    patch3.length2 += diff_text.length;
                   } else if (diff_text.length >= 2 * this.Patch_Margin) {
                     if (patchDiffLength) {
-                      this.patch_addContext_(patch2, prepatch_text);
-                      patches.push(patch2);
-                      patch2 = new diff_match_patch2.patch_obj();
+                      this.patch_addContext_(patch3, prepatch_text);
+                      patches.push(patch3);
+                      patch3 = new diff_match_patch2.patch_obj();
                       patchDiffLength = 0;
                       prepatch_text = postpatch_text;
                       char_count1 = char_count2;
@@ -2202,24 +2218,24 @@ var LiveJson = (() => {
               }
             }
             if (patchDiffLength) {
-              this.patch_addContext_(patch2, prepatch_text);
-              patches.push(patch2);
+              this.patch_addContext_(patch3, prepatch_text);
+              patches.push(patch3);
             }
             return patches;
           };
           diff_match_patch2.prototype.patch_deepCopy = function(patches) {
             var patchesCopy = [];
             for (var x = 0; x < patches.length; x++) {
-              var patch2 = patches[x];
+              var patch3 = patches[x];
               var patchCopy = new diff_match_patch2.patch_obj();
               patchCopy.diffs = [];
-              for (var y = 0; y < patch2.diffs.length; y++) {
-                patchCopy.diffs[y] = patch2.diffs[y].slice();
+              for (var y = 0; y < patch3.diffs.length; y++) {
+                patchCopy.diffs[y] = patch3.diffs[y].slice();
               }
-              patchCopy.start1 = patch2.start1;
-              patchCopy.start2 = patch2.start2;
-              patchCopy.length1 = patch2.length1;
-              patchCopy.length2 = patch2.length2;
+              patchCopy.start1 = patch3.start1;
+              patchCopy.start2 = patch3.start2;
+              patchCopy.length1 = patch3.length1;
+              patchCopy.length2 = patch3.length2;
               patchesCopy[x] = patchCopy;
             }
             return patchesCopy;
@@ -2303,33 +2319,33 @@ var LiveJson = (() => {
               patches[x].start1 += paddingLength;
               patches[x].start2 += paddingLength;
             }
-            var patch2 = patches[0];
-            var diffs = patch2.diffs;
+            var patch3 = patches[0];
+            var diffs = patch3.diffs;
             if (diffs.length == 0 || diffs[0][0] != DIFF_EQUAL) {
               diffs.unshift([DIFF_EQUAL, nullPadding]);
-              patch2.start1 -= paddingLength;
-              patch2.start2 -= paddingLength;
-              patch2.length1 += paddingLength;
-              patch2.length2 += paddingLength;
+              patch3.start1 -= paddingLength;
+              patch3.start2 -= paddingLength;
+              patch3.length1 += paddingLength;
+              patch3.length2 += paddingLength;
             } else if (paddingLength > diffs[0][1].length) {
               var extraLength = paddingLength - diffs[0][1].length;
               diffs[0][1] = nullPadding.substring(diffs[0][1].length) + diffs[0][1];
-              patch2.start1 -= extraLength;
-              patch2.start2 -= extraLength;
-              patch2.length1 += extraLength;
-              patch2.length2 += extraLength;
+              patch3.start1 -= extraLength;
+              patch3.start2 -= extraLength;
+              patch3.length1 += extraLength;
+              patch3.length2 += extraLength;
             }
-            patch2 = patches[patches.length - 1];
-            diffs = patch2.diffs;
+            patch3 = patches[patches.length - 1];
+            diffs = patch3.diffs;
             if (diffs.length == 0 || diffs[diffs.length - 1][0] != DIFF_EQUAL) {
               diffs.push([DIFF_EQUAL, nullPadding]);
-              patch2.length1 += paddingLength;
-              patch2.length2 += paddingLength;
+              patch3.length1 += paddingLength;
+              patch3.length2 += paddingLength;
             } else if (paddingLength > diffs[diffs.length - 1][1].length) {
               var extraLength = paddingLength - diffs[diffs.length - 1][1].length;
               diffs[diffs.length - 1][1] += nullPadding.substring(0, extraLength);
-              patch2.length1 += extraLength;
-              patch2.length2 += extraLength;
+              patch3.length1 += extraLength;
+              patch3.length2 += extraLength;
             }
             return nullPadding;
           };
@@ -2345,39 +2361,39 @@ var LiveJson = (() => {
               var start2 = bigpatch.start2;
               var precontext = "";
               while (bigpatch.diffs.length !== 0) {
-                var patch2 = new diff_match_patch2.patch_obj();
+                var patch3 = new diff_match_patch2.patch_obj();
                 var empty = true;
-                patch2.start1 = start1 - precontext.length;
-                patch2.start2 = start2 - precontext.length;
+                patch3.start1 = start1 - precontext.length;
+                patch3.start2 = start2 - precontext.length;
                 if (precontext !== "") {
-                  patch2.length1 = patch2.length2 = precontext.length;
-                  patch2.diffs.push([DIFF_EQUAL, precontext]);
+                  patch3.length1 = patch3.length2 = precontext.length;
+                  patch3.diffs.push([DIFF_EQUAL, precontext]);
                 }
-                while (bigpatch.diffs.length !== 0 && patch2.length1 < patch_size - this.Patch_Margin) {
+                while (bigpatch.diffs.length !== 0 && patch3.length1 < patch_size - this.Patch_Margin) {
                   var diff_type = bigpatch.diffs[0][0];
                   var diff_text = bigpatch.diffs[0][1];
                   if (diff_type === DIFF_INSERT) {
-                    patch2.length2 += diff_text.length;
+                    patch3.length2 += diff_text.length;
                     start2 += diff_text.length;
-                    patch2.diffs.push(bigpatch.diffs.shift());
+                    patch3.diffs.push(bigpatch.diffs.shift());
                     empty = false;
-                  } else if (diff_type === DIFF_DELETE && patch2.diffs.length == 1 && patch2.diffs[0][0] == DIFF_EQUAL && diff_text.length > 2 * patch_size) {
-                    patch2.length1 += diff_text.length;
+                  } else if (diff_type === DIFF_DELETE && patch3.diffs.length == 1 && patch3.diffs[0][0] == DIFF_EQUAL && diff_text.length > 2 * patch_size) {
+                    patch3.length1 += diff_text.length;
                     start1 += diff_text.length;
                     empty = false;
-                    patch2.diffs.push([diff_type, diff_text]);
+                    patch3.diffs.push([diff_type, diff_text]);
                     bigpatch.diffs.shift();
                   } else {
-                    diff_text = diff_text.substring(0, patch_size - patch2.length1 - this.Patch_Margin);
-                    patch2.length1 += diff_text.length;
+                    diff_text = diff_text.substring(0, patch_size - patch3.length1 - this.Patch_Margin);
+                    patch3.length1 += diff_text.length;
                     start1 += diff_text.length;
                     if (diff_type === DIFF_EQUAL) {
-                      patch2.length2 += diff_text.length;
+                      patch3.length2 += diff_text.length;
                       start2 += diff_text.length;
                     } else {
                       empty = false;
                     }
-                    patch2.diffs.push([diff_type, diff_text]);
+                    patch3.diffs.push([diff_type, diff_text]);
                     if (diff_text == bigpatch.diffs[0][1]) {
                       bigpatch.diffs.shift();
                     } else {
@@ -2385,20 +2401,20 @@ var LiveJson = (() => {
                     }
                   }
                 }
-                precontext = this.diff_text2(patch2.diffs);
+                precontext = this.diff_text2(patch3.diffs);
                 precontext = precontext.substring(precontext.length - this.Patch_Margin);
                 var postcontext = this.diff_text1(bigpatch.diffs).substring(0, this.Patch_Margin);
                 if (postcontext !== "") {
-                  patch2.length1 += postcontext.length;
-                  patch2.length2 += postcontext.length;
-                  if (patch2.diffs.length !== 0 && patch2.diffs[patch2.diffs.length - 1][0] === DIFF_EQUAL) {
-                    patch2.diffs[patch2.diffs.length - 1][1] += postcontext;
+                  patch3.length1 += postcontext.length;
+                  patch3.length2 += postcontext.length;
+                  if (patch3.diffs.length !== 0 && patch3.diffs[patch3.diffs.length - 1][0] === DIFF_EQUAL) {
+                    patch3.diffs[patch3.diffs.length - 1][1] += postcontext;
                   } else {
-                    patch2.diffs.push([DIFF_EQUAL, postcontext]);
+                    patch3.diffs.push([DIFF_EQUAL, postcontext]);
                   }
                 }
                 if (!empty) {
-                  patches.splice(++x, 0, patch2);
+                  patches.splice(++x, 0, patch3);
                 }
               }
             }
@@ -2423,27 +2439,27 @@ var LiveJson = (() => {
               if (!m) {
                 throw new Error("Invalid patch string: " + text[textPointer]);
               }
-              var patch2 = new diff_match_patch2.patch_obj();
-              patches.push(patch2);
-              patch2.start1 = parseInt(m[1], 10);
+              var patch3 = new diff_match_patch2.patch_obj();
+              patches.push(patch3);
+              patch3.start1 = parseInt(m[1], 10);
               if (m[2] === "") {
-                patch2.start1--;
-                patch2.length1 = 1;
+                patch3.start1--;
+                patch3.length1 = 1;
               } else if (m[2] == "0") {
-                patch2.length1 = 0;
+                patch3.length1 = 0;
               } else {
-                patch2.start1--;
-                patch2.length1 = parseInt(m[2], 10);
+                patch3.start1--;
+                patch3.length1 = parseInt(m[2], 10);
               }
-              patch2.start2 = parseInt(m[3], 10);
+              patch3.start2 = parseInt(m[3], 10);
               if (m[4] === "") {
-                patch2.start2--;
-                patch2.length2 = 1;
+                patch3.start2--;
+                patch3.length2 = 1;
               } else if (m[4] == "0") {
-                patch2.length2 = 0;
+                patch3.length2 = 0;
               } else {
-                patch2.start2--;
-                patch2.length2 = parseInt(m[4], 10);
+                patch3.start2--;
+                patch3.length2 = parseInt(m[4], 10);
               }
               textPointer++;
               while (textPointer < text.length) {
@@ -2454,11 +2470,11 @@ var LiveJson = (() => {
                   throw new Error("Illegal escape in patch_fromText: " + line);
                 }
                 if (sign == "-") {
-                  patch2.diffs.push([DIFF_DELETE, line]);
+                  patch3.diffs.push([DIFF_DELETE, line]);
                 } else if (sign == "+") {
-                  patch2.diffs.push([DIFF_INSERT, line]);
+                  patch3.diffs.push([DIFF_INSERT, line]);
                 } else if (sign == " ") {
-                  patch2.diffs.push([DIFF_EQUAL, line]);
+                  patch3.diffs.push([DIFF_EQUAL, line]);
                 } else if (sign == "@") {
                   break;
                 } else if (sign === "") {
@@ -2544,7 +2560,7 @@ var LiveJson = (() => {
               diff: function diff2(txt1, txt2) {
                 return instance.patch_toText(instance.patch_make(txt1, txt2));
               },
-              patch: function patch2(txt1, _patch) {
+              patch: function patch3(txt1, _patch) {
                 var results = instance.patch_apply(instance.patch_fromText(_patch), txt1);
                 for (var i = 0; i < results[1].length; i++) {
                   if (!results[1][i]) {
@@ -2583,8 +2599,8 @@ var LiveJson = (() => {
           if (context.delta[2] !== TEXT_DIFF) {
             return;
           }
-          var patch2 = getDiffMatchPatch(true).patch;
-          context.setResult(patch2(context.left, context.delta[0])).exit();
+          var patch3 = getDiffMatchPatch(true).patch;
+          context.setResult(patch3(context.left, context.delta[0])).exit();
         };
         patchFilter$3.filterName = "texts";
         var textDeltaReverse = function textDeltaReverse2(delta) {
@@ -2648,7 +2664,7 @@ var LiveJson = (() => {
             }
           }, {
             key: "patch",
-            value: function patch2(left, delta) {
+            value: function patch3(left, delta) {
               return this.processor.process(new PatchContext(left, delta));
             }
           }, {
@@ -3749,7 +3765,7 @@ var LiveJson = (() => {
           }
           return defaultInstance$4.diff.apply(defaultInstance$4, arguments);
         }
-        function patch() {
+        function patch2() {
           if (!defaultInstance$4) {
             defaultInstance$4 = new DiffPatcher();
           }
@@ -3779,7 +3795,7 @@ var LiveJson = (() => {
         exports2.create = create;
         exports2.dateReviver = dateReviver;
         exports2.diff = diff;
-        exports2.patch = patch;
+        exports2.patch = patch2;
         exports2.unpatch = unpatch;
         exports2.reverse = reverse;
         exports2.clone = clone$1;
@@ -4133,7 +4149,7 @@ var LiveJson = (() => {
       }
     }
   }
-  function applyPatch(document2, patch, validateOperation, mutateDocument, banPrototypeModifications) {
+  function applyPatch(document2, patch2, validateOperation, mutateDocument, banPrototypeModifications) {
     if (mutateDocument === void 0) {
       mutateDocument = true;
     }
@@ -4141,16 +4157,16 @@ var LiveJson = (() => {
       banPrototypeModifications = true;
     }
     if (validateOperation) {
-      if (!Array.isArray(patch)) {
+      if (!Array.isArray(patch2)) {
         throw new JsonPatchError("Patch sequence must be an array", "SEQUENCE_NOT_AN_ARRAY");
       }
     }
     if (!mutateDocument) {
       document2 = _deepClone(document2);
     }
-    var results = new Array(patch.length);
-    for (var i = 0, length_1 = patch.length; i < length_1; i++) {
-      results[i] = applyOperation(document2, patch[i], validateOperation, true, banPrototypeModifications, i);
+    var results = new Array(patch2.length);
+    for (var i = 0, length_1 = patch2.length; i < length_1; i++) {
+      results[i] = applyOperation(document2, patch2[i], validateOperation, true, banPrototypeModifications, i);
       document2 = results[i].newDocument;
     }
     results.newDocument = document2;
@@ -4425,20 +4441,34 @@ var LiveJson = (() => {
   });
 
   // js/live_json/live_json.js
-  require_jsondiffpatch_umd();
+  var jsondiffpatch = __toModule(require_jsondiffpatch_umd());
+  function dispatchGlobalEvent(eventName) {
+    let event;
+    if (typeof window.CustomEvent === "function") {
+      event = new window.CustomEvent(eventName, {});
+    } else {
+      event = document.createEvent("Event");
+      event.initEvent(eventName, false, true);
+    }
+    window.dispatchEvent(event);
+  }
   function createLiveJSONHooks() {
     return {
       LiveJSON: {
         mounted() {
-          this.handleEvent("lj:patch", ({ doc_name, patch, method }) => {
-            if (method === "rfc") {
-              window[doc_name] = applyPatch(window[doc_name], patch).newDocument;
+          this.handleEvent("lj:patch", ({ doc_name, patch: patch2, method }) => {
+            console.log("patching");
+            if (method == "rfc") {
+              window[doc_name] = applyPatch(window[doc_name], patch2).newDocument;
             } else {
-              window[doc_name] = jsondiffpatch.patch(window[doc_name], patch);
+              window[doc_name] = jsondiffpatch.patch(window[doc_name], patch2);
             }
+            dispatchGlobalEvent(doc_name + "_patched");
           });
-          this.handleEvent("lj:init", ({ doc_name, initial_data }) => {
-            window[doc_name] = initial_data;
+          this.handleEvent("lj:init", ({ doc_name, data }) => {
+            console.log("Init");
+            window[doc_name] = data;
+            dispatchGlobalEvent(doc_name + "_initiated");
           });
         }
       }

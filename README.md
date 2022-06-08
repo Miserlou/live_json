@@ -1,9 +1,9 @@
 # live_json
 [![GitHub](https://img.shields.io/github/stars/Miserlou/live_json?style=social)](https://github.com/Miserlou/live_json)
 [![Hex.pm](https://img.shields.io/hexpm/v/live_json.svg)](https://hex.pm/packages/live_json)
-[![WIP](https://img.shields.io/badge/status-WIP-red)](https://github.com/Miserlou/live_json)
+[![WIP](https://img.shields.io/badge/status-alpha-yellow)](https://github.com/Miserlou/live_json)
 
-**LiveJSON** provides LiveView-like updating for JSON objects rather than DOM elements. It works within your existing LiveViews - just use `push_patch` as you would `assign` or `push_event`. Only the changes to the data are sent over the wire, not the whole object every time.
+**LiveJSON** provides LiveView-like updating for JSON objects rather than DOM elements. It works within your existing LiveViews - just use `push_patch` as you would `assign` or `push_event`. Only the changes to the data are sent over the wire, not the whole object every time, so it can end up being quite fast indeed.
 
 ### Example
 
@@ -78,8 +78,59 @@ If your app uses an `assets/package.json`, you'll also need to add:
 
 and then `npm install`.
 
+Finally, you'll need to put a tag for the hook somewhere on the related Heex:
+
+```html
+<div id="lj" phx-hook="LiveJSON"></div>
+```
+
 ## Usage
-...
+
+There are only two commands: `initialize` and `push_patch`.
+
+On your mount, initialize the state:
+
+```elixir
+def mount(_params, _, socket) do
+  data = get_your_data()
+
+  {:ok,
+    socket
+    |> LiveJson.initialize("dataviz", data)
+  }
+end
+```
+
+Then, to send updated data:
+
+```elixir
+def handle_info({:new_data_to_visualize, new_data} = _event, socket) do
+  {:noreply, 
+    socket
+    |> LiveJson.push_patch("dataviz", new_data)
+  }
+end
+```
+
+Or, in RFC 6902 mode:
+
+```elixir
+def handle_info({:new_data_to_visualize, new_data} = _event, socket) do
+  {:noreply, 
+    socket
+    |> LiveJson.push_patch("dataviz", new_data, :rfc)
+  }
+end
+```
+
+In your JS console `window.dataviz` will now hold the updated data for this example.
+
+Each init/patch also emits a global event, which you can listen to with:
+
+```javascript
+window.addEventListener('dataviz_initialized', event => doSomethingOnInit(), false)
+window.addEventListener('dataviz_patch', event => doSomethingOnPatch(), false)
+```
 
 ## Capabilities and Limitations
 
@@ -92,7 +143,10 @@ By default, LiveJSON uses `jsondiff` for diffing/patching data. This is fast, bu
 Alternately, you can use `:rfc` mode to use JSON-Patch (RFC 6902) style patching. This is (currently) slower, but will mean that your data can be used by a larger number of consumers, such as a mobile applications.
 
 ## TODO
-...
+ - Tests
+ - Example Projects
+ - Perf Testing, with Numbers
+ - Elixirify Code
 
 ## Standing on the Shoulders of Giants
 
@@ -106,6 +160,10 @@ There actually isn't very much code in this repo, just a convenient interface an
 Other people have tried to solve this problem in other ways, but this was the solution that I wanted for my application. If you'd like to explore alternate approaches see:
 
  * [hanishe/live_data](https://github.com/hansihe/live_data)
+
+The project structure for building and packaging hooks comes from:
+
+ * [benvp/live_motion](https://github.com/benvp/live_motion)
 
 ## License
 
