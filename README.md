@@ -123,7 +123,7 @@ def handle_info({:new_data_to_visualize, new_data} = _event, socket) do
 end
 ```
 
-In your JS console `window.dataviz` will now hold the updated data for this example.
+In your JS console `window.dataviz` will now hold the updated data for this example. Also note that `dataviz` is just an example - you can call it whatever you want the object to be called, and you can have multiple objects on the same page.
 
 Each init/patch also emits a global event, which you can listen to with:
 
