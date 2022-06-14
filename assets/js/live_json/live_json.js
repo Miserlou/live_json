@@ -14,7 +14,7 @@ function dispatchGlobalEvent(eventName) {
   window.dispatchEvent(event)
 }
 
-export function createLiveJSONHooks() {
+export function createLiveJsonHooks() {
   return {
     LiveJSON: {
       mounted() {

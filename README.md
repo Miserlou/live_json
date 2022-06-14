@@ -3,7 +3,7 @@
 [![Hex.pm](https://img.shields.io/hexpm/v/live_json.svg)](https://hex.pm/packages/live_json)
 [![WIP](https://img.shields.io/badge/status-alpha-yellow)](https://github.com/Miserlou/live_json)
 
-**LiveJSON** provides LiveView-like updating for JSON objects rather than DOM elements. It works within your existing LiveViews - just use `push_patch` as you would `assign` or `push_event`. Only the changes to the data are sent over the wire, not the whole object every time, so it can end up being quite fast indeed.
+**LiveJSON** is an Elixir/Phoenix provides LiveView-like updating for JSON objects rather than DOM elements. It works within your existing LiveViews - just use `push_patch` as you would `assign` or `push_event`. Only the changes to the data are sent over the wire, not the whole object every time, so it can end up being quite fast indeed.
 
 This may be useful for **front-end frameworks**, **data visualization**, **games** and anything else where you need dynamically updated data that lives outside of the DOM, like **mobile apps**.
 

@@ -3807,7 +3807,7 @@ var LiveJson = (() => {
   // js/live_json/index.js
   var live_json_exports = {};
   __export(live_json_exports, {
-    createLiveJSONHooks: () => createLiveJSONHooks
+    createLiveJsonHooks: () => createLiveJsonHooks
   });
 
   // node_modules/fast-json-patch/module/core.mjs
@@ -4452,12 +4452,11 @@ var LiveJson = (() => {
     }
     window.dispatchEvent(event);
   }
-  function createLiveJSONHooks() {
+  function createLiveJsonHooks() {
     return {
       LiveJSON: {
         mounted() {
           this.handleEvent("lj:patch", ({ doc_name, patch: patch2, method }) => {
-            console.log("patching");
             if (method == "rfc") {
               window[doc_name] = applyPatch(window[doc_name], patch2).newDocument;
             } else {
@@ -4466,9 +4465,8 @@ var LiveJson = (() => {
             dispatchGlobalEvent(doc_name + "_patched");
           });
           this.handleEvent("lj:init", ({ doc_name, data }) => {
-            console.log("Init");
             window[doc_name] = data;
-            dispatchGlobalEvent(doc_name + "_initiated");
+            dispatchGlobalEvent(doc_name + "_initialized");
           });
         }
       }

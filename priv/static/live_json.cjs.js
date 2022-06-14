@@ -3805,7 +3805,7 @@ var require_jsondiffpatch_umd = __commonJS({
 
 // js/live_json/index.js
 __export(exports, {
-  createLiveJSONHooks: () => createLiveJSONHooks
+  createLiveJsonHooks: () => createLiveJsonHooks
 });
 
 // node_modules/fast-json-patch/module/core.mjs
@@ -4450,12 +4450,11 @@ function dispatchGlobalEvent(eventName) {
   }
   window.dispatchEvent(event);
 }
-function createLiveJSONHooks() {
+function createLiveJsonHooks() {
   return {
     LiveJSON: {
       mounted() {
         this.handleEvent("lj:patch", ({ doc_name, patch: patch2, method }) => {
-          console.log("patching");
           if (method == "rfc") {
             window[doc_name] = applyPatch(window[doc_name], patch2).newDocument;
           } else {
@@ -4464,9 +4463,8 @@ function createLiveJSONHooks() {
           dispatchGlobalEvent(doc_name + "_patched");
         });
         this.handleEvent("lj:init", ({ doc_name, data }) => {
-          console.log("Init");
           window[doc_name] = data;
-          dispatchGlobalEvent(doc_name + "_initiated");
+          dispatchGlobalEvent(doc_name + "_initialized");
         });
       }
     }

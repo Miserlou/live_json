@@ -25,9 +25,14 @@ defmodule LiveJson do
       JsonDiffEx.diff(old_data, new_data)
     end
 
-    socket
-    |> Utils.assign(doc_atom, new_data)
-    |> Utils.push_event("lj:patch", %{doc_name: doc_name, patch: data_patch, method: method})
+    # If there's no data in the patch, no reason to send it.
+    if data_patch != %{} do
+      socket
+      |> Utils.assign(doc_atom, new_data)
+      |> Utils.push_event("lj:patch", %{doc_name: doc_name, patch: data_patch, method: method})
+    else
+      socket
+    end
 
   end
 
