@@ -1,3 +1,4 @@
+
 # live_json
 [![GitHub](https://img.shields.io/github/stars/Miserlou/live_json?style=social)](https://github.com/Miserlou/live_json)
 [![Hex.pm](https://img.shields.io/hexpm/v/live_json.svg)](https://hex.pm/packages/live_json)
@@ -25,6 +26,25 @@ window.viz_data
 ```
 
 The data is automatically updated, but if you check the WebSocket, you'll see that only the data that changed has been sent.
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+- [live_json](#live_json)
+    - [Example](#example)
+    - [Problem / Solution](#problem--solution)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Utility Functions](#utility-functions)
+      - [Assign](#assign)
+      - [Append](#append)
+      - [Put](#put)
+  - [Capabilities and Limitations](#capabilities-and-limitations)
+    - [Fast and Non-Standard](#fast-and-non-standard)
+    - [Slower and Standardized](#slower-and-standardized)
+  - [TODO](#todo)
+  - [Standing on the Shoulders of Giants](#standing-on-the-shoulders-of-giants)
+  - [License](#license)
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ### Problem / Solution
 
