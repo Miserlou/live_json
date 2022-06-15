@@ -6,7 +6,9 @@
 
 **LiveJSON** is an Elixir/Phoenix library which provides LiveView-like updating for JSON objects rather than DOM elements. It works within your existing LiveViews - just use `push_patch` as you would `assign` or `push_event`. Only the changes to the data are sent over the wire, not the whole object every time, so it can end up being quite fast indeed.
 
-This may be useful for **front-end frameworks**, **data visualization**, **games** and anything else where you need dynamically updated data that lives outside of the DOM, like **mobile apps**. Fundamentally, LiveJSON is an easy way to send data from your LiveView to a client's JavaScript context.
+This may be useful for **front-end frameworks**, **data visualization**, **games** and anything else where you need dynamically updated data that lives outside of the DOM, like **mobile apps**. 
+
+Fundamentally, **LiveJSON** is an **easy way to send data from your LiveView to a client's JavaScript context**.
 
 ### Example
 
