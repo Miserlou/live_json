@@ -1,3 +1,7 @@
+## 0.3.1
+
+* Loosen LV requirement
+
 ## 0.3.0
 
 * Adds `assign`, `append`, and `put` utility functions.
