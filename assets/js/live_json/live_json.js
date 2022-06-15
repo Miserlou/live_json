@@ -18,6 +18,10 @@ export function createLiveJsonHooks() {
   return {
     LiveJSON: {
       mounted() {
+
+          /*
+          Patch and Track
+          */
         
           this.handleEvent("lj:patch", ({doc_name, patch, method}) => {       
             if(method == "rfc"){
@@ -32,6 +36,31 @@ export function createLiveJsonHooks() {
           this.handleEvent("lj:init", ({doc_name, data}) => {
             window[doc_name] = data;
             dispatchGlobalEvent(doc_name + "_initialized");
+          });
+
+          /*
+          Utilities
+          */
+
+          this.handleEvent("lj:assign", ({doc_name, data}) => {
+            window[doc_name] = data;
+            dispatchGlobalEvent(doc_name + "_assigned");
+          });
+
+          this.handleEvent("lj:append", ({doc_name, data}) => {
+            if(window[doc_name] == null){
+              window[doc_name] == [];
+            }
+            window[doc_name].push(data);
+            dispatchGlobalEvent(doc_name + "_appended");
+          });
+
+          this.handleEvent("lj:put", ({doc_name, key, value}) => {
+            if(window[doc_name] == null){
+              window[doc_name] == {};
+            }
+            window[doc_name].set(key, value);
+            dispatchGlobalEvent(doc_name + "_put");
           });
 
       }

@@ -3,7 +3,7 @@
 [![Hex.pm](https://img.shields.io/hexpm/v/live_json.svg)](https://hex.pm/packages/live_json)
 [![WIP](https://img.shields.io/badge/status-alpha-yellow)](https://github.com/Miserlou/live_json)
 
-**LiveJSON** is an Elixir/Phoenix provides LiveView-like updating for JSON objects rather than DOM elements. It works within your existing LiveViews - just use `push_patch` as you would `assign` or `push_event`. Only the changes to the data are sent over the wire, not the whole object every time, so it can end up being quite fast indeed.
+**LiveJSON** is an Elixir/Phoenix library which provides LiveView-like updating for JSON objects rather than DOM elements. It works within your existing LiveViews - just use `push_patch` as you would `assign` or `push_event`. Only the changes to the data are sent over the wire, not the whole object every time, so it can end up being quite fast indeed.
 
 This may be useful for **front-end frameworks**, **data visualization**, **games** and anything else where you need dynamically updated data that lives outside of the DOM, like **mobile apps**.
 
@@ -39,7 +39,7 @@ First, the usual:
 ```elixir
 def deps do
   [
-    {:live_json, "~> 0.1.0"}
+    {:live_json, "~> 0.3.0"}
   ]
 end
 ```
@@ -130,6 +130,59 @@ Each init/patch also emits a global event, which you can listen to with:
 ```javascript
 window.addEventListener('dataviz_initialized', event => doSomethingOnInit(), false)
 window.addEventListener('dataviz_patch', event => doSomethingOnPatch(), false)
+```
+
+### Utility Functions
+
+**LiveJSON** also includes some utility functions that you might want if you're working with Phoenix and JavaScript at the same time.
+
+#### Assign
+
+Assign a value in the JS context without tracking.
+
+```elixir
+  {:noreply, 
+    socket
+    |> LiveJson.assign("foo", "bar")
+  }
+end
+```
+```javascript
+window.foo
+// "bar"
+```
+
+#### Append
+
+Append data to a list in the JS context without tracking. Will create the list if it doesn't exist.
+
+```elixir
+  {:noreply, 
+    socket
+    |> LiveJson.append("foo", "bar")
+    |> LiveJson.append("foo", "baz")
+  }
+end
+```
+```javascript
+window.foo
+// ["bar", "baz"]
+```
+
+#### Put
+
+Put data in a map in the JS context without tracking. Will create the dictionary if it doesn't exist.
+
+```elixir
+  {:noreply, 
+    socket
+    |> LiveJson.put("foo", "bar", "baz")
+  }
+end
+```
+```javascript
+window.foo
+// {"bar": "baz"}
 ```
 
 ## Capabilities and Limitations
