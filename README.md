@@ -40,7 +40,7 @@ First, the usual:
 ```elixir
 def deps do
   [
-    {:live_json, "~> 0.3.2"}
+    {:live_json, "~> 0.3.3"}
   ]
 end
 ```
