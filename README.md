@@ -86,7 +86,7 @@ Finally, you'll need to put a tag for the hook somewhere on the related Heex:
 
 ## Usage
 
-There are only two commands: `initialize` and `push_patch`.
+Normal usage requires two commands: `initialize` and `push_patch`.
 
 On your mount, initialize the state:
 
@@ -141,11 +141,10 @@ window.addEventListener('dataviz_patch', event => doSomethingOnPatch(), false)
 Assign a value in the JS context without tracking.
 
 ```elixir
-  {:noreply, 
-    socket
-    |> LiveJson.assign("foo", "bar")
-  }
-end
+{:noreply, 
+  socket
+  |> LiveJson.assign("foo", "bar")
+}
 ```
 ```javascript
 window.foo
@@ -157,12 +156,11 @@ window.foo
 Append data to a list in the JS context without tracking. Will create the list if it doesn't exist.
 
 ```elixir
-  {:noreply, 
-    socket
-    |> LiveJson.append("foo", "bar")
-    |> LiveJson.append("foo", "baz")
-  }
-end
+{:noreply, 
+  socket
+  |> LiveJson.append("foo", "bar")
+  |> LiveJson.append("foo", "baz")
+}
 ```
 ```javascript
 window.foo
@@ -174,11 +172,10 @@ window.foo
 Put data in a map in the JS context without tracking. Will create the dictionary if it doesn't exist.
 
 ```elixir
-  {:noreply, 
-    socket
-    |> LiveJson.put("foo", "bar", "baz")
-  }
-end
+{:noreply, 
+  socket
+  |> LiveJson.put("foo", "bar", "baz")
+}
 ```
 ```javascript
 window.foo
