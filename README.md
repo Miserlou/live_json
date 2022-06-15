@@ -142,6 +142,8 @@ By default, LiveJSON uses `jsondiff` for diffing/patching data. This is fast, bu
 
 Alternately, you can use `:rfc` mode to use JSON-Patch (RFC 6902) style patching. This is (currently) slower, but will mean that your data can be used by a larger number of consumers, such as a mobile applications.
 
+_As of 0.2.1, this is [much faster](https://github.com/corka149/jsonpatch/issues/11)!_
+
 ## TODO
  - Tests
  - Example Projects
