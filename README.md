@@ -4,6 +4,25 @@
 [![Hex.pm](https://img.shields.io/hexpm/v/live_json.svg)](https://hex.pm/packages/live_json)
 [![WIP](https://img.shields.io/badge/status-alpha-yellow)](https://github.com/Miserlou/live_json)
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+[live_json](#live_json)
+  - [Example](#example)
+  - [Problem / Solution](#problem--solution)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Utility Functions](#utility-functions)
+    - [Assign](#assign)
+    - [Append](#append)
+    - [Put](#put)
+- [Capabilities and Limitations](#capabilities-and-limitations)
+  - [Fast and Non-Standard](#fast-and-non-standard)
+  - [Slower and Standardized](#slower-and-standardized)
+- [TODO](#todo)
+- [Standing on the Shoulders of Giants](#standing-on-the-shoulders-of-giants)
+- [License](#license)
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 **LiveJSON** is an Elixir/Phoenix library which provides LiveView-like updating for JSON objects rather than DOM elements. It works within your existing LiveViews - just use `push_patch` as you would `assign` or `push_event`. Only the changes to the data are sent over the wire, not the whole object every time, so it can end up being quite fast indeed.
 
 This may be useful for **front-end frameworks**, **data visualization**, **games** and anything else where you need dynamically updated data that lives outside of the DOM, like **mobile apps**.
@@ -26,25 +45,6 @@ window.viz_data
 ```
 
 The data is automatically updated, but if you check the WebSocket, you'll see that only the data that changed has been sent.
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-- [live_json](#live_json)
-    - [Example](#example)
-    - [Problem / Solution](#problem--solution)
-  - [Installation](#installation)
-  - [Usage](#usage)
-    - [Utility Functions](#utility-functions)
-      - [Assign](#assign)
-      - [Append](#append)
-      - [Put](#put)
-  - [Capabilities and Limitations](#capabilities-and-limitations)
-    - [Fast and Non-Standard](#fast-and-non-standard)
-    - [Slower and Standardized](#slower-and-standardized)
-  - [TODO](#todo)
-  - [Standing on the Shoulders of Giants](#standing-on-the-shoulders-of-giants)
-  - [License](#license)
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ### Problem / Solution
 
