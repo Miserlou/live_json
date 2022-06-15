@@ -48,7 +48,7 @@ export function createLiveJsonHooks() {
           });
 
           this.handleEvent("lj:append", ({doc_name, data}) => {
-            if(window[doc_name] == null){
+            if(!(doc_name in window)){
               window[doc_name] == [];
             }
             window[doc_name].push(data);
@@ -56,7 +56,7 @@ export function createLiveJsonHooks() {
           });
 
           this.handleEvent("lj:put", ({doc_name, key, value}) => {
-            if(window[doc_name] == null){
+            if(!(doc_name in window)){
               window[doc_name] == {};
             }
             window[doc_name].set(key, value);

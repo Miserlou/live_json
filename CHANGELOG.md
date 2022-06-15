@@ -1,3 +1,7 @@
+## 0.3.2
+
+* Util bugfix
+
 ## 0.3.1
 
 * Loosen LV requirement
