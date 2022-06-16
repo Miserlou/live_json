@@ -42,7 +42,7 @@ First, the usual:
 ```elixir
 def deps do
   [
-    {:live_json, "~> 0.3.3"}
+    {:live_json, "~> 0.4.0"}
   ]
 end
 ```
@@ -183,6 +183,24 @@ Put data in a map in the JS context without tracking. Will create the dictionary
 ```javascript
 window.foo
 // {"bar": "baz"}
+```
+
+#### Sending Data to Your Application
+
+LiveJSON also provides a convenient way to send data from a JavaScript context back to your Phoenix LiveView without user interaction.
+
+```javascript
+const ljEvent = new CustomEvent('send_data', {
+  name: "your_handler",
+  data: your_data
+});
+document.getElementById("lj").dispatchEvent(ljEvent);
+```
+```elixir
+def handle_event("your_handler", data, socket) do
+  IO.inspect("Got data!")
+  {:noreply, socket}
+end
 ```
 
 ## Capabilities and Limitations

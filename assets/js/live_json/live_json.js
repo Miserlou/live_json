@@ -39,7 +39,7 @@ export function createLiveJsonHooks() {
           });
 
           /*
-          Utilities
+          Local Utilities
           */
 
           this.handleEvent("lj:assign", ({doc_name, data}) => {
@@ -61,6 +61,13 @@ export function createLiveJsonHooks() {
             }
             window[doc_name].set(key, value);
             dispatchGlobalEvent(doc_name + "_put");
+          });
+
+          /*
+          Remote Utilities
+          */
+          this.el.addEventListener("send_data", e => {
+            this.pushEvent(e.name, e.data);
           });
 
       }

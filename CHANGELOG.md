@@ -1,3 +1,7 @@
+## 0.4.0
+
+* Add `send_data` utility. 
+
 ## 0.3.3
 
 * Util bugfix
