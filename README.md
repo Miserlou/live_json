@@ -42,7 +42,7 @@ First, the usual:
 ```elixir
 def deps do
   [
-    {:live_json, "~> 0.4.0"}
+    {:live_json, "~> 0.4.1"}
   ]
 end
 ```
@@ -191,8 +191,11 @@ LiveJSON also provides a convenient way to send data from a JavaScript context b
 
 ```javascript
 const ljEvent = new CustomEvent('send_data', {
-  name: "your_handler",
-  data: your_data
+  bubbles: true,
+  detail: { 
+    name: 'your_handler',
+    data: your_data,
+  }
 });
 document.getElementById("lj").dispatchEvent(ljEvent);
 ```

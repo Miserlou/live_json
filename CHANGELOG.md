@@ -1,3 +1,7 @@
+## 0.4.1
+
+Fix that.
+
 ## 0.4.0
 
 * Add `send_data` utility. 

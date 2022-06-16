@@ -67,7 +67,7 @@ export function createLiveJsonHooks() {
           Remote Utilities
           */
           this.el.addEventListener("send_data", e => {
-            this.pushEvent(e.name, e.data);
+            this.pushEvent(e.detail.name, e.detail.data);
           });
 
       }

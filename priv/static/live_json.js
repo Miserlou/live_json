@@ -4487,7 +4487,7 @@ var LiveJson = (() => {
             dispatchGlobalEvent(doc_name + "_put");
           });
           this.el.addEventListener("send_data", (e) => {
-            this.pushEvent(e.name, e.data);
+            this.pushEvent(e.detail.name, e.detail.data);
           });
         }
       }
