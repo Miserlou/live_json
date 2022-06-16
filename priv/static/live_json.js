@@ -3807,7 +3807,8 @@ var LiveJson = (() => {
   // js/live_json/index.js
   var live_json_exports = {};
   __export(live_json_exports, {
-    createLiveJsonHooks: () => createLiveJsonHooks
+    createLiveJsonHooks: () => createLiveJsonHooks,
+    sendData: () => sendData
   });
 
   // node_modules/fast-json-patch/module/core.mjs
@@ -4492,6 +4493,16 @@ var LiveJson = (() => {
         }
       }
     };
+  }
+  function sendData(handler_name, data_to_send, elid = "lj") {
+    const ljEvent = new CustomEvent("send_data", {
+      bubbles: true,
+      detail: {
+        name: handler_name,
+        data: data_to_send
+      }
+    });
+    document.getElementById(elid).dispatchEvent(ljEvent);
   }
   return live_json_exports;
 })();

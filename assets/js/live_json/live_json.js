@@ -74,3 +74,14 @@ export function createLiveJsonHooks() {
     },
   };
 };
+
+export function sendData(handler_name, data_to_send, elid = "lj"){
+  const ljEvent = new CustomEvent('send_data', {
+    bubbles: true,
+    detail: { 
+      name: handler_name,
+      data: data_to_send,
+    }
+  });
+  document.getElementById(elid).dispatchEvent(ljEvent);
+}

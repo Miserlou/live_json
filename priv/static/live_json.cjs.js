@@ -3805,7 +3805,8 @@ var require_jsondiffpatch_umd = __commonJS({
 
 // js/live_json/index.js
 __export(exports, {
-  createLiveJsonHooks: () => createLiveJsonHooks
+  createLiveJsonHooks: () => createLiveJsonHooks,
+  sendData: () => sendData
 });
 
 // node_modules/fast-json-patch/module/core.mjs
@@ -4490,6 +4491,16 @@ function createLiveJsonHooks() {
       }
     }
   };
+}
+function sendData(handler_name, data_to_send, elid = "lj") {
+  const ljEvent = new CustomEvent("send_data", {
+    bubbles: true,
+    detail: {
+      name: handler_name,
+      data: data_to_send
+    }
+  });
+  document.getElementById(elid).dispatchEvent(ljEvent);
 }
 /*!
  * https://github.com/Starcounter-Jack/JSON-Patch

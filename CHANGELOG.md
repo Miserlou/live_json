@@ -1,3 +1,7 @@
+## 0.4.2
+
+Export new `sendData` function.
+
 ## 0.4.1
 
 Fix that.

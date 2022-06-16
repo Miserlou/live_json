@@ -42,7 +42,7 @@ First, the usual:
 ```elixir
 def deps do
   [
-    {:live_json, "~> 0.4.1"}
+    {:live_json, "~> 0.4.2"}
   ]
 end
 ```
@@ -189,6 +189,12 @@ window.foo
 
 LiveJSON also provides a convenient way to send data from a JavaScript context back to your Phoenix LiveView without user interaction.
 
+```javascript
+import { sendData } from 'live_json';
+sendData('your_handler', your_data); 
+// or sendData('your_handler', your_data, 'your_hook_id_if_it_isnt_lj')
+```
+_or_:
 ```javascript
 const ljEvent = new CustomEvent('send_data', {
   bubbles: true,
