@@ -8,7 +8,7 @@
 
 This may be useful for **front-end frameworks**, **data visualization**, **games** and anything else where you need dynamically updated data that lives outside of the DOM, like **mobile apps**. 
 
-Fundamentally, **LiveJSON** is an **easy way to send data from your LiveView to a client's JavaScript context**.
+Fundamentally, **LiveJSON** is an **easy way interact with client's JavaScript context from LiveView**.
 
 ### Example
 
@@ -154,9 +154,11 @@ window.foo
 // "bar"
 ```
 
+Also dispatches a `doc_name + "_assigned"` event.
+
 #### Append
 
-Append data to a list in the JS context without tracking. Will create the list if it doesn't exist.
+Append data to a list in the JS context without tracking. Will create the list if it doesn't global exist.
 
 ```elixir
 {:noreply, 
@@ -169,6 +171,8 @@ Append data to a list in the JS context without tracking. Will create the list i
 window.foo
 // ["bar", "baz"]
 ```
+
+Also dispatches a `doc_name + "_appended"` global event.
 
 #### Put
 
@@ -184,6 +188,8 @@ Put data in a map in the JS context without tracking. Will create the dictionary
 window.foo
 // {"bar": "baz"}
 ```
+
+Also dispatches a `doc_name + "_put"` global event.
 
 #### Sending Data to Your Application
 
@@ -211,6 +217,8 @@ def handle_event("your_handler", data, socket) do
   {:noreply, socket}
 end
 ```
+
+Also dispatches `data_sent` and `your_handler + "_sent"` global events.
 
 ## Capabilities and Limitations
 
