@@ -1,7 +1,7 @@
 defmodule LiveJson.MixProject do
   use Mix.Project
 
-  @version "0.4.2"
+  @version "0.4.3"
 
   def project do
     [
@@ -33,7 +33,7 @@ defmodule LiveJson.MixProject do
     [
       {:phoenix, "~> 1.6.0"},
       {:phoenix_html, "~> 3.1"},
-      {:phoenix_live_view, ">= 0.16.0"},
+      {:phoenix_live_view, ">= 0.16.0", allow_pre: true},
       {:jsonpatch, "~> 0.13.1"},
       {:json_diff_ex, "~> 0.5.0"},
       {:jason, "~> 1.3.0", optional: true},
