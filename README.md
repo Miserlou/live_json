@@ -132,7 +132,7 @@ Each init/patch also emits a global event, which you can listen to with:
 
 ```javascript
 window.addEventListener('dataviz_initialized', event => doSomethingOnInit(), false)
-window.addEventListener('dataviz_patch', event => doSomethingOnPatch(), false)
+window.addEventListener('dataviz_patched', event => doSomethingOnPatch(), false)
 ```
 
 ### Utility Functions
