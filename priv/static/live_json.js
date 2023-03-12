@@ -4489,6 +4489,8 @@ var LiveJson = (() => {
           });
           this.el.addEventListener("send_data", (e) => {
             this.pushEvent(e.detail.name, e.detail.data);
+            dispatchGlobalEvent("data_sent");
+            dispatchGlobalEvent(e.detail.name + "_sent");
           });
         }
       }

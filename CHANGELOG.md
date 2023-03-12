@@ -1,3 +1,7 @@
+## 0.4.4
+
+Support Phx 1.7, I think.
+
 ## 0.4.2
 
 Export new `sendData` function.
